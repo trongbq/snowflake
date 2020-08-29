@@ -24,7 +24,7 @@ class Snowflake:
         +------------------------------------------------------------------------+
     '''
 
-    def __init__(self, node_id: int, now: Callable[[], int] = lambda: int(time.monotonic())):
+    def __init__(self, node_id: int, now: Callable[[], int] = lambda: int(time.monotonic() * 1000)):
         assert node_id >= 1 and node_id <= NODE_MAX_VALUE
         self.node_id = node_id
         self.last_timestamp = -1
