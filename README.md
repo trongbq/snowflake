@@ -31,5 +31,12 @@ Library is designed and run on Python >= 3.8
 ```
 
 ### Benchmark
-TBD
 
+Library's benchmark result from `benchmark.py` file.
+```
+Benchmark on 10 IDs within 15606 nanoseconds (0.015606 millis), each ID took 1560.6 nanoseconds
+Benchmark on 100 IDs within 122336 nanoseconds (0.122336 millis), each ID took 1223.36 nanoseconds
+Benchmark on 1000 IDs within 1228141 nanoseconds (1.228141 millis), each ID took 1228.141 nanoseconds
+Benchmark on 10000 IDs within 11263438 nanoseconds (11.263438 millis), each ID took 1126.3438 nanoseconds
+Benchmark on 1000000 IDs within 1134503695 nanoseconds (1134.503695 millis), each ID took 1134.503695 nanoseconds
+```
