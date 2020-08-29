@@ -4,6 +4,9 @@ A sequence generator based on the idea of [Twitter Snowflake](https://blog.twitt
 Other python libraries I found are either using Python2 or unstable due to not solve `clock drift`
 issues.
 
+### Environment
+Library is designed and run on Python >= 3.8
+
 ### Structure
 
 ```

@@ -43,7 +43,7 @@ class Snowflake:
             self.sequence = (self.sequence + 1) & SEQUENCE_BIT_MASK
             if self.sequence == 0:
                 #  Out of sequence value, wait for the next millis
-                timestamp = nextMillis()
+                timestamp = self.next_millis()
         else:
             self.sequence = 0
 
