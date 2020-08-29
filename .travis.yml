@@ -1,0 +1,10 @@
+language: python
+
+python: 3.8
+
+before_script:
+  - pip install flake8
+
+script:
+  - flake8
+  - python test_snowflake.py

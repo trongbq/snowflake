@@ -1,4 +1,6 @@
-Snowflake
+# Snowflake
+
+[![Build Status](https://travis-ci.org/trongbq/snowflake.svg?branch=master)](https://travis-ci.org/trongbq/snowflake)
 
 A sequence generator based on the idea of [Twitter Snowflake](https://blog.twitter.com/engineering/en_us/a/2010/announcing-snowflake.html).
 Other python libraries I found are either using Python2 or unstable due to not solving `clock drift`
