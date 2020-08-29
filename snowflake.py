@@ -31,12 +31,12 @@ class Snowflake:
         self.sequence = 0
         self.now = now
 
-
     def next_id(self) -> int:
         timestamp = self.now()
 
         if timestamp < self.last_timestamp:
-            log.warning("Clock is moving backwards, current timestamp: " + str(timestamp) + " - last timestamp: " + str(self.last_timestamp))
+            log.warning("Clock is moving backwards, current timestamp: " + str(timestamp)
+                        + " - last timestamp: " + str(self.last_timestamp))
             raise SystemError("Clock is moving backwards!!!")
 
         if timestamp == self.last_timestamp:
@@ -49,12 +49,12 @@ class Snowflake:
 
         self.last_timestamp = timestamp
 
-        return (timestamp + ORIGIN_EPOCH) << TIMESTAMP_LEFT_SHIFT | self.node_id << NODE_LEFT_SHIFT | self.sequence
-
+        return (((timestamp + ORIGIN_EPOCH) << TIMESTAMP_LEFT_SHIFT) |
+                (self.node_id << NODE_LEFT_SHIFT) |
+                self.sequence)
 
     def next_millis(self) -> int:
         timestamp = self.now()
         while timestamp == self.last_timestamp:
             timestamp = self.now()
         return timestamp
-
