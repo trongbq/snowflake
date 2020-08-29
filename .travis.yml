@@ -6,5 +6,5 @@ before_script:
   - pip install flake8
 
 script:
-  - flake8
+  - flake8 snowflake.py
   - python test_snowflake.py
