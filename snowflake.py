@@ -9,8 +9,13 @@ NODE_LEFT_SHIFT: Final = 12
 SEQUENCE_BIT: Final = 12
 SEQUENCE_BIT_MASK = -1 ^ (-1 << SEQUENCE_BIT)
 TIMESTAMP_LEFT_SHIFT: Final = NODE_BIT + SEQUENCE_BIT
-# Since time#monotonic only return distance time, so using this milestone epoch as an origin
-ORIGIN_EPOCH = int(time.time() * 1000)
+
+# Our schema ID has 41 bits, equivalent to 69 years support, using TIMESTAMP_EPOCH, we can support
+# generate ID til year 2079, you can change this value to recent time in order to increase
+# supported upper bound time
+TIMESTAMP_EPOCH = 1288834974657
+# Since time#monotonic only return distance time, so using this milestone as an origin
+ORIGIN = int(time.time() * 1000) - TIMESTAMP_EPOCH
 
 log = logging.getLogger(__name__)
 
@@ -49,9 +54,15 @@ class Snowflake:
 
         self.last_timestamp = timestamp
 
-        return (((timestamp + ORIGIN_EPOCH) << TIMESTAMP_LEFT_SHIFT) |
+        return (((timestamp + ORIGIN) << TIMESTAMP_LEFT_SHIFT) |
                 (self.node_id << NODE_LEFT_SHIFT) |
                 self.sequence)
+
+    def decompose(self, cid: int) -> (int, int, int):
+        seq = cid & SEQUENCE_BIT_MASK
+        node_id = cid >> NODE_LEFT_SHIFT & NODE_MAX_VALUE
+        timestamp = cid >> TIMESTAMP_LEFT_SHIFT
+        return timestamp + TIMESTAMP_EPOCH, node_id, seq
 
     def next_millis(self) -> int:
         timestamp = self.now()
